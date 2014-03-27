@@ -32,7 +32,7 @@ describe "A Person" do
 	it "can tell you their location" do 
 		person = Person.new(person_attributes)		
 
-		expect(person.location.class).to eq("".class)
+		expect(person.location.class).to eq(Location)
 	end
 	
 end
