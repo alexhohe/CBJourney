@@ -1,4 +1,5 @@
 require_relative 'Transportation_service'
+require_relative 'Purchasing_service'
 
 class Menu
 
@@ -16,6 +17,7 @@ class Menu
 
 	def run
 		begin		
+			puts "----------------------\n"
 			display_header	
 			display_options
 			input = gets.chomp
@@ -62,7 +64,8 @@ class MainMenu < Menu
 
 		case input
 		when "1"
-			
+			nextMenu = ShopMenu.new(simulator)
+			nextMenu.run
 			true
 		when "2"
 			nextMenu = TravelMenu.new(simulator)
@@ -101,5 +104,65 @@ class TravelMenu < Menu
 			super
 		end					
 	end	
+
+end
+
+class ShopMenu < Menu
+
+	def display_header
+		super
+		# puts simulator.person.product_summary
+		puts simulator.product_summary
+		puts simulator.current_location.get_price_display
+	end
+
+	def build_options
+		["Buy Jobs","Buy RDB","Buy Talent Network","Sell Jobs","Sell RDB","Sell Talent Network","Back"]
+	end
+
+	def handle_input(input)
+		case input
+		when "1"
+			action = "Buy"
+			product = "Jobs"
+			quantity = get_quantity(action,product)
+			Purchasing_service.process_transaction(simulator.person,simulator.current_location, action,product,quantity)
+
+		when "2"
+			action = "Buy"
+			product = "RDB"
+			quantity = get_quantity(action,product)
+			Purchasing_service.process_transaction(simulator.person,simulator.current_location, action,product,quantity)
+		when "3"
+			action = "Buy"
+			product = "Talent Network"
+			quantity = get_quantity(action,product)
+			Purchasing_service.process_transaction(simulator.person,simulator.current_location, action,product,quantity)
+		when "4"
+			action = "Sell"
+			product = "Jobs"
+			quantity = get_quantity(action,product)
+			Purchasing_service.process_transaction(simulator.person,simulator.current_location, action,product,quantity)
+		when "5"
+			action = "Sell"
+			product = "RDB"
+			quantity = get_quantity(action,product)
+			Purchasing_service.process_transaction(simulator.person,simulator.current_location, action,product,quantity)
+		when "6"
+			action = "Sell"
+			product = "Talent Network"
+			quantity = get_quantity(action,product)
+			Purchasing_service.process_transaction(simulator.person,simulator.current_location, action,product,quantity)
+		when options.length.to_s
+			false
+		else
+			super
+		end
+	end
+
+	def get_quantity(action,name)
+		puts "#{action} how many #{name}?"
+		gets.chomp.to_i
+	end
 
 end

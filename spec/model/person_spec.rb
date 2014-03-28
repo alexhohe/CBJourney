@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../../lib/Person.rb'
+
 
 describe "A Person" do 
 
@@ -7,9 +7,9 @@ describe "A Person" do
 		
 		person = Person.new(person_attributes)
 
-		inventory = person.inventory
+		products = person.products
 
-		expect(inventory.class).to eq({test: 'data'}.class)
+		expect(products.class).to eq(Products)
 
 	end
 	
@@ -24,7 +24,7 @@ describe "A Person" do
 	it "can receive more cash and store the updated value" do
 		person = Person.new(person_attributes)		
 
-		person.get_payed(50.50)
+		person.get_paid(50.50)
 		
 		expect(person.cash).to eq(10050.50)
 	end

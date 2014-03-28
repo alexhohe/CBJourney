@@ -22,4 +22,8 @@ class Simulator
 		person.to_s
 	end
 
+	def product_summary
+		"SIM TEST"
+		puts person.products.summary
+	end
 end

@@ -12,21 +12,23 @@ describe "The Transportaion service" do
 		expect(person.location.to_s).to include("Los Angeles, CA")
 	end
 
-	it "can tell you if a person has enough money to travel" do
-		person = Person.new(person_attributes)
+	# # # Functionality moved to Person for any amount
 
-		destination = Location.new("Los Angeles, CA", -1000, 175)
+	# it "can tell you if a person has enough money to travel" do
+	# 	person = Person.new(person_attributes)
 
-		true.should be(Transportation_service.can_afford?(person, destination))
-	end
+	# 	destination = Location.new("Los Angeles, CA", -1000, 175)
 
-	it "can tell you if a person does not have enough money to travel" do
-		person = Person.new(person_attributes({cash: 0.00}))
+	# 	true.should be(Transportation_service.can_afford?(person, destination))
+	# end
 
-		destination = Location.new("Los Angeles, CA", -1000, 175)
+	# it "can tell you if a person does not have enough money to travel" do
+	# 	person = Person.new(person_attributes({cash: 0.00}))
 
-		true.should_not be(Transportation_service.can_afford?(person, destination))	
-	end
+	# 	destination = Location.new("Los Angeles, CA", -1000, 175)
+
+	# 	true.should_not be(Transportation_service.can_afford?(person, destination))	
+	# end
 
 	it "prevents travel is a person does not have enough money" do
 			

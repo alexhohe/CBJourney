@@ -1,19 +1,19 @@
 class Person
 
-	attr_reader :inventory, :name, :cash
+	attr_reader :products, :name, :cash
 	attr_accessor :location
 
 	def initialize(params)
 		@name = params[:name]
 
-		@inventory = {}
+		@products = params[:products]
 
 		@cash = params[:cash]
 
 		@location = params[:location]
 	end
 	
-	def get_payed(money)
+	def get_paid(money)
 		@cash = (cash + money)
 	end
 
@@ -26,7 +26,15 @@ class Person
 	end
 
 	def to_s
-		"#{name} has $#{cash.round(2)} and is in #{location}"
+		"#{name}\n$#{cash.round(2)}\n@#{location}"
+	end
+
+	def product_summary
+		products.summary
+	end
+
+	def can_afford?(amount)
+		cash >= amount
 	end
 
 end
