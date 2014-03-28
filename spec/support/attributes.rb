@@ -1,5 +1,3 @@
-require_relative "../../lib/Location.rb"
-
 def person_attributes(overrides = {})
 	{
 		name: "Alex Hohe",

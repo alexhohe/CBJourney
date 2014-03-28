@@ -1,6 +1,7 @@
 class Person
 
-	attr_reader :inventory, :name, :location
+	attr_reader :inventory, :name
+	attr_accessor :location
 
 	def initialize(params)
 		@name = params[:name]
@@ -18,6 +19,10 @@ class Person
 
 	def get_payed(money)
 		inventory.store(:cash, (cash + money))
+	end
+
+	def pay(money)
+		inventory.store(:cash, (cash - money))
 	end
 
 	def current_location
