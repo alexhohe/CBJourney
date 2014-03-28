@@ -10,6 +10,7 @@ class Simulator
 	end
 
 	def run
+		puts welcome_message
 		menu = MainMenu.new(self)
 		menu.run		
 	end
@@ -25,5 +26,9 @@ class Simulator
 	def product_summary
 		"SIM TEST"
 		puts person.products.summary
+	end
+
+	def welcome_message
+		"OH that's right! You're #{person.name}, the finest sales rep we've seen in years. But to prove yourself you've got to buy and sell products to get to chicago with the most cash possible. Make sure to look for deals, not all cities pay the same for all products."
 	end
 end

@@ -5,6 +5,10 @@ class Location
 
 	PRICE_PER_DISTANCE = 5.25
 
+	def is_the_end?
+		name == END_LOCATION
+	end
+
 	def initialize(name,x,y,job_price=419,rdb_price=1000,talent_network_price=10000)
 		@name = name
 		@x = x
@@ -49,6 +53,11 @@ class Location
 			talent_network_price
 		end
 	end
+
+	def can_afford_any_products?(amount)
+		job_price <= amount or rdb_price <= amount or talent_network_price <= amount
+	end
+
 end
 
 class Locations
@@ -65,6 +74,10 @@ class Locations
 
 	end
 
+	def self.can_travel_anywhere?(current_location, amount)
+		LOCATIONS.map{|loc| current_location.cost_to(loc) <= amount}.contains(true)
+	end
+
 end
 
 LOCATIONS = [
@@ -75,3 +88,5 @@ LOCATIONS = [
 		Location.new("Indianapolis, IN", 3979,8614,410,1400,10000),
 		Location.new("Chicago, IL", 4188,8762,650,1200,20000)
 	]
+
+	END_LOCATION = "Chicago, IL"

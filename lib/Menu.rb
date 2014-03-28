@@ -22,7 +22,7 @@ class Menu
 			display_options
 			input = gets.chomp
 			puts "----------------------\n"			
-		end while handle_input(input)
+		end while handle_input(input) and not win_conditions_met?
 	end
 
 	def display_options
@@ -45,6 +45,18 @@ class Menu
 
 	def display_header
 		puts status
+	end
+
+	def win_conditions_met?
+		if not simulator.current_location.can_afford_any_products?(simulator.person.cash) and simulator.person.out_of_product? and not simulator.current_location.can_travel_anywhere?(simulator.current_location,simulator.person.cash)
+			puts "You're out things to sell, too broke to buy more, and too broke to travel. You live on the streets now. Good luck righting the rats for food."
+			true
+		end
+
+		if simulator.current_location.is_the_end?
+			puts "You've done it! You got to #{simulator.current_location} and even have $#{simulator.person.cash} to spare! Enjoy a night night out on the town and some McDonald's on me. You did good #{simulator.person.name}."
+			true
+		end
 	end
 
 end
@@ -72,6 +84,7 @@ class MainMenu < Menu
 			nextMenu.run
 			true
 		when options.length.to_s
+			puts "You gave up with $#{simulator.person.cash} to your name in #{simulator.current_location}."
 			false
 		else
 			super

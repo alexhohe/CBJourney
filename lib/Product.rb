@@ -66,7 +66,10 @@ class Products
 		end
 		
 		inventory.quantity >= quantity
+	end
 
+	def empty?
+		not mylist.values.map{|prod| prod.quantity > 0}.include?(true)
 	end
 
 end

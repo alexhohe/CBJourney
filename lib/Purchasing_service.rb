@@ -11,6 +11,7 @@ class Purchasing_service
 			if can_afford?(person,amount)
 				person.pay(amount)
 				person.products.gain(quantity,product)		
+				puts "You paid $#{amount} for #{quantity} #{product}"
 			else
 				puts "You can't afford that."
 			end
@@ -18,6 +19,7 @@ class Purchasing_service
 			if has_enough?(person,product,quantity)
 				person.get_paid(amount)
 				person.products.lose(quantity,product)		
+				puts "You sold #{quantity} #{product} for $#{amount}"
 			else
 				puts "You don't have that many."				
 			end

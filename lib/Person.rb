@@ -37,4 +37,7 @@ class Person
 		cash >= amount
 	end
 
+	def out_of_product?
+		products.empty?
+	end
 end
