@@ -1,7 +1,5 @@
 class Transportation_service
 
-	PRICE_PER_DISTANCE = 0.50
-
 	def self.to(actor,destination)
 		if can_afford?(actor, destination)
 			actor.pay cost_to(actor.location, destination)
@@ -16,7 +14,7 @@ class Transportation_service
 	end
 
 	def self.cost_to (origin,destination)
-		PRICE_PER_DISTANCE * origin.distance_to(destination)
+		origin.cost_to(destination)
 	end
 end
 

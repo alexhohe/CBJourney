@@ -29,4 +29,8 @@ class Person
 		location
 	end
 
+	def to_s
+		"#{name} has $#{cash.round(2)} and is in #{location}"
+	end
+
 end
