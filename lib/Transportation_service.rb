@@ -5,7 +5,7 @@ class Transportation_service
 			actor.pay cost_to(actor.location, destination)
 			actor.location = destination
 		else
-			raise TooBrokeError
+			puts "You're too broke for that."			
 		end		
 	end
 

@@ -13,7 +13,7 @@ describe "The Transportaion service" do
 	end
 
 	it "can tell you if a person has enough money to travel" do
-		person = Person.new(person_attributes({cash: 510.00}))
+		person = Person.new(person_attributes)
 
 		destination = Location.new("Los Angeles, CA", -1000, 175)
 
@@ -29,22 +29,16 @@ describe "The Transportaion service" do
 	end
 
 	it "prevents travel is a person does not have enough money" do
-
-		begin
 			
-			person = Person.new(person_attributes({cash: 0.00}))
-			
-			destination = Location.new("Los Angeles, CA", -1000, 175)
+		person = Person.new(person_attributes({cash: 0.00}))
+		
+		starting_location = person.location
 
-			Transportation_service.to(person, destination)			
-			
-			#You shouldn't get here, because you're broke!
-			fail 
+		destination = Location.new("Los Angeles, CA", -1000, 175)
 
-		rescue TooBrokeError
-			#This is what we wanted!
-			true.should be(true)
-		end
+		Transportation_service.to(person, destination)			
+
+		expect(person.location).to eq(starting_location)		
 	end
 
 	it "reduces that person's money before they travel" do
@@ -60,5 +54,5 @@ describe "The Transportaion service" do
 		expect(person.cash).to be < starting_cash
 
 	end
-	
+
 end

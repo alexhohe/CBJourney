@@ -2,7 +2,7 @@ class Location
 
 	attr_reader :name,:x,:y
 
-	PRICE_PER_DISTANCE = 0.50
+	PRICE_PER_DISTANCE = 3.25
 
 	def initialize(name,x,y)
 		@name = name
@@ -22,11 +22,11 @@ class Location
 	end
 
 	def cost_to(destination)
-		PRICE_PER_DISTANCE * distance_to(destination)
+		(PRICE_PER_DISTANCE * distance_to(destination)).round(2)
 	end
 
-	def display_with_cost_to_travel(destination)
-		"#{name} $#{cost_to(destination).round(2)}"
+	def display_with_cost_to_travel(origin)
+		"#{name} $#{origin.cost_to(self).to_s}"
 	end
 
 end

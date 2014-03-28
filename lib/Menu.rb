@@ -1,3 +1,5 @@
+require_relative 'Transportation_service'
+
 class Menu
 
 	attr_reader :simulator, :options 
@@ -77,10 +79,12 @@ end
 
 class TravelMenu < Menu
 
-	def build_options
-		list = Locations.all - [simulator.current_location]
+	attr_reader :menu_locations
 
-		list = list.each{|loc|
+	def build_options
+		@menu_locations = Locations.all - [simulator.current_location]
+
+		list = menu_locations.map{|loc|
 			loc.display_with_cost_to_travel(simulator.current_location)
 		}
 		list << "Back"
@@ -88,6 +92,9 @@ class TravelMenu < Menu
 
 	def handle_input(input)
 		case input
+		when "1".."#{options.length-1}"
+			Transportation_service.to(simulator.person,menu_locations[input.to_i-1])
+			false
 		when options.length.to_s
 			false
 		else	
